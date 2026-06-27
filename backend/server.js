@@ -11,10 +11,14 @@ dotenv.config();
 
 const app = express();
 const server = http.createServer(app);
+
+// Socket.io with CORS fix
 const io = socketIo(server, {
   cors: {
-    origin: process.env.FRONTEND_URL || "*",
+    origin: "*",
     methods: ["GET", "POST"],
+    credentials: false,
+    allowEIO3: true,
   },
 });
 
@@ -25,8 +29,16 @@ const pool = new Pool({
     "postgresql://user:password@localhost:5432/scoreboard",
 });
 
-// Middleware
-app.use(cors());
+// Middleware - CORS FIX
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "OPTIONS"],
+    credentials: false,
+  }),
+);
+
+app.options("*", cors());
 app.use(express.json());
 
 const JWT_SECRET =
