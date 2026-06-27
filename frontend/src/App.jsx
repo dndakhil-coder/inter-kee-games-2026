@@ -7,8 +7,7 @@ import Login from './pages/Login';
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
-  
-  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3001/api';
+const API_URL = "https://inter-kee-games-2026.vercel.app/api";
 
   useEffect(() => {
     const token = localStorage.getItem('adminToken');
