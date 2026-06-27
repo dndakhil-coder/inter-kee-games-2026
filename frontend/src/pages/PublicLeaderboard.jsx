@@ -22,7 +22,7 @@ function PublicLeaderboard({ apiUrl }) {
 
   useEffect(() => {
     // Connect to WebSocket
-    const socketUrl = process.env.REACT_APP_API_URL || 'http://localhost:3001';
+    const socketUrl = io("https://inter-kee-games-2026.vercel.app");
     const newSocket = io(socketUrl, { reconnection: true });
 
     newSocket.on('connect', () => {
